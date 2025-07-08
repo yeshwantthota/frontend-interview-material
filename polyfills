@@ -22,3 +22,24 @@ Function.prototype.myBind = function (context, ...args){
 }
 
 x.myBind(obj, 20)()
+
+
+
+// Polyfill for map-------------------------
+
+function cb (x){
+    console.log(x);
+}
+
+Array.prototype.mymap = function (cb){
+    for(let i = 0;i<this.length;i++){
+        cb(this[i]);
+    }
+}
+
+
+const arr = [1, 2, 3];
+
+// arr.map(a => cb(a)); 
+
+arr.mymap(cb);
