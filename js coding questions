@@ -2,3 +2,24 @@
 // memioze function
 
 Link: https://www.greatfrontend.com/questions/javascript/memoize
+
+
+------------------>
+
+const a = [1, 2, 3, [4, [5, [6, 7]]], 8, 9];
+
+
+const a2 = [];
+function flattenArray(a, a2){
+    a.forEach((e) => {
+        // console.log(typeof(e));
+        if(typeof(e) === 'object'){
+            flattenArray(e, a2);
+        }else{
+            a2.push(e);
+        }
+    })
+    return a2;
+}
+
+console.log(flattenArray(a, a2));
