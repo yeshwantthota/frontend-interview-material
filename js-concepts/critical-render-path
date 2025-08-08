@@ -1,0 +1,96 @@
+1. What is the Critical Rendering Path?
+The Critical Rendering Path is basically the sequence of steps the browser takes to convert your HTML, CSS, and JavaScript into pixels on the screen.
+
+Think of it like this:
+
+You order a pizza (HTML, CSS, JS). The kitchen (browser) needs to:
+
+Read the recipe (HTML).
+
+Get the ingredients (CSS, JS, images).
+
+Prepare the base (DOM).
+
+Add toppings (CSS rules).
+
+Bake it (render tree).
+
+Serve it hot (paint to the screen).
+
+If any step is slow, your pizza arrives late — or in web terms, your page feels slow.
+
+2. Why is it important?
+The CRP determines how fast a user sees something useful on your page.
+
+Optimizing it can mean the difference between a fast, responsive site and one that feels sluggish.
+
+Google’s performance metrics (like First Contentful Paint, Largest Contentful Paint) are tied to how well you manage the CRP.
+
+3. Steps of the Critical Rendering Path
+Step 1: HTML → DOM
+Browser downloads HTML file.
+
+Parses it top to bottom, creating the DOM (Document Object Model) — a tree-like structure representing all elements.
+
+📌 Blockers here:
+
+If the browser finds a <script> without defer or async, it stops DOM building until the JS is loaded and executed.
+
+Step 2: CSS → CSSOM
+Browser downloads all CSS files it finds.
+
+Parses them into the CSSOM (CSS Object Model) — another tree structure of all styles.
+
+📌 Blockers here:
+
+CSS is render-blocking — the browser won’t show anything until the CSS is fully downloaded and parsed.
+
+Step 3: DOM + CSSOM → Render Tree
+Browser merges DOM + CSSOM to make the Render Tree.
+
+This contains only the nodes that are visible on screen (e.g., display: none items are skipped).
+
+Step 4: Layout (Reflow)
+Browser figures out where and how big each visible element should be (width, height, position).
+
+This is called layout or reflow.
+
+Step 5: Paint
+Browser paints pixels for each node onto the screen (colors, text, images, shadows, borders).
+
+May be followed by compositing if elements are layered.
+
+4. The Whole Flow
+HTML → Parse → DOM
+CSS → Parse → CSSOM
+DOM + CSSOM → Render Tree
+Render Tree → Layout
+Layout → Paint
+5. How to Optimize the CRP
+Minimize render-blocking resources
+
+Add async or defer to scripts.
+
+Inline critical CSS for above-the-fold content.
+
+Reduce resource size & number
+
+Minify CSS/JS.
+
+Compress images.
+
+Prioritize visible content
+
+Lazy-load images.
+
+Load non-critical CSS/JS later.
+
+Use efficient CSS
+
+Avoid huge unused CSS files.
+
+✅ In short:
+The Critical Rendering Path is like the assembly line from raw HTML/CSS/JS → final painted page.
+The faster and smoother you make that line, the quicker users see your content.
+
+![alt text](image.png)
