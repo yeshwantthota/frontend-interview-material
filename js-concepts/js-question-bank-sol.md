@@ -142,7 +142,20 @@ function once(fn) {
 ```
 
 ### Variant 2 - reset after N calls
-Add a counter and reset `called` after N invocations.
+```js
+function once (fn, limit) {
+    let result;
+   
+    return function (args) {
+        if(limit > 0){
+            result = fn(args);
+             --limit;
+            return result;
+           
+        }
+    }
+}
+```
 
 ### Variant 3 - retry on failure
 If `fn` throws, reset `called` so next call retries:
