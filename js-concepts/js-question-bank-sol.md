@@ -111,17 +111,34 @@ function once(fn) {
 
 ### Variant 1 - async-safe
 ```js
-function onceAsync(fn) {
-  let called = false;
-  let promise;
-  return function(...args) {
-    if (!called) {
-      promise = Promise.resolve().then(() => fn.apply(this, args));
-      called = true;
+function once(fn) {
+     let result;
+     let isProgress = null;
+    return function () {
+        
+        
+        if(result){
+            return Promise.resolve(result);
+        }
+        if(isProgress){
+            return isProgress;
+        }
+        
+        isProgress =  new Promise(function(resolve, reject) {
+          fn().then((val) => {
+              result = val;
+              isProgress = null;
+              resolve(val);
+          })
+          .catch((err) => {
+              isProgress = null;
+              throw err;
+          })
+            
+        })
+        
+        return isProgress;
     }
-    return promise;
-  };
-}
 ```
 
 ### Variant 2 - reset after N calls
