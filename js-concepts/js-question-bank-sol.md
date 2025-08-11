@@ -281,6 +281,32 @@ function debounce(fn, delay = 300) {
 
 **Variants Quick:**
 - Immediate invoke option: run on leading edge by checking `!timer` and optionally clearing.
+  ```js
+
+  function debounce(fn , delay, immediate = false) {
+   let timer;
+   return function(...args){
+
+    if(immediate && !timer){
+        fn.apply(this, args);
+      }
+    
+      clearTimeout(timer);
+
+       timer = setTimeout(() => {
+          timer = null;
+          if(!immediate){
+             fn.apply(this, args);
+          }
+      }, delay)
+
+       
+   }
+}
+
+// clearTimeout(timer) only tells JavaScript to cancel the scheduled callback,
+but it does not change the timer variable’s value. 
+  ```
 - Cancel method: return object with `cancel()` to clear timer.
 - Leading & trailing: track flags to run at start and end.
 
