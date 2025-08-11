@@ -306,6 +306,36 @@ function debounce(fn, delay = 300) {
   // clearTimeout(timer) only tells JavaScript to cancel the scheduled callback, but it does not change the timer variable’s value. 
   
 - Cancel method: return object with `cancel()` to clear timer.
+  ```js
+  function debounce(fn, delay){
+  let timer;
+  const saveData =  function (...args) {
+  clearTimeout(timer);
+
+  timer = setTimeout(() => {
+     fn.apply(this, args);
+
+  }, delay)
+  }
+
+  saveData.cancel = function () {
+    clearTimeout(timer);
+    console.log("cancellua")
+  }
+  
+  return saveData;
+  }
+  
+  
+  function fn () {
+    console.log("api calling==>");
+  }
+  
+  const saveData = debounce(fn , 3000);
+  saveData();
+  
+  saveData.cancel()
+
 - Leading & trailing: track flags to run at start and end.
 
 **Pitfalls:** Not clearing timer causes memory leak; not preserving `this` context.
