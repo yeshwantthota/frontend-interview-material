@@ -338,6 +338,36 @@ function debounce(fn, delay = 300) {
 
 - Leading & trailing: track flags to run at start and end.
 
+  ```js
+   function debounce(fn, delay, options) {
+    let {leading, trailing} = options;
+    let timer;
+
+    return function (...args) {
+      if(leading && !timer){
+         fn.apply(this, args);
+      }
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        if(leading){
+          timer = null;
+        }
+        if(trailing){
+          fn.apply(this, args);
+        }
+      }, delay)
+    }
+  }
+  
+  function fn() {
+    console.log("api calling==>");
+  }
+  
+  const debounced = debounce(fn , 3000, {leading: true, trailing: false});
+  
+  debounced();
+  debounced();
+
 **Pitfalls:** Not clearing timer causes memory leak; not preserving `this` context.
 
 ---
