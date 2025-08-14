@@ -1,0 +1,57 @@
+let obj = [
+    {
+    key:"sample 1",
+    value:"d1"
+},
+    {
+    key:"sample 2",
+    value:"d1"
+},
+    {
+    key:"sample 1",
+    value:"d1"
+},    {
+    key:"sample 3",
+    value:"d1"
+},
+    {
+    key:"sample 4",
+    value:"d1"
+},
+ {
+    key:"sample 4",
+    value:"d1"
+},
+]
+
+let output = {};
+
+obj.forEach((v) => {
+    if(!output[v.key]){
+        output[v.key] = [v];
+    }else{
+        output[v.key].push(v)
+    }
+})
+
+Object.keys(output).forEach((e) => {
+    if(output[e].length < 2){
+        output[e] = [];
+    }
+})
+
+// output
+
+// {
+//   'sample 1': [
+//     { key: 'sample 1', value: 'd1' },
+//     { key: 'sample 1', value: 'd1' }
+//   ],
+//   'sample 2': [],
+//   'sample 3': [],
+//   'sample 4': [
+//     { key: 'sample 4', value: 'd1' },
+//     { key: 'sample 4', value: 'd1' }
+//   ]
+// }
+// console.log(output)
