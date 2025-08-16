@@ -378,15 +378,17 @@ function debounce(fn, delay = 300) {
 
 **Simple throttle (timestamp)**
 ```js
-function throttle(fn, limit = 200) {
-  let last = 0;
-  return function(...args) {
-    const now = Date.now();
-    if (now - last >= limit) {
-      last = now;
-      fn.apply(this, args);
-    }
-  };
+export default function throttle(func, wait) {
+   let isCalled = false;
+   return function (...args) {
+       if(!isCalled){
+        func.call(this, ...args);
+        isCalled = true;
+        setTimeout(() => {
+         isCalled = false;
+        }, wait);
+       }
+   }
 }
 ```
 **Variants:** leading/trailing, using timers instead of timestamps, returning last result, throttling promises.
