@@ -391,6 +391,39 @@ export default function throttle(func, wait) {
    }
 }
 ```
+- Trailing 
+
+```js
+function throttle(func, wait) {
+   let isCalled = false;
+   return function (...args) {
+       if(!isCalled){
+        isCalled = true;
+        setTimeout(() => {
+         func.call(this, ...args); 
+         isCalled = false;
+        }, wait);
+       }
+   }
+}
+```
+- Trailing + Leading
+```js
+function throttle(func, wait) {
+   let isCalled = false;
+   return function (...args) {
+       if(!isCalled){
+        func.call(this, ...args);
+        isCalled = true;
+        setTimeout(() => {
+         func.call(this, ...args); 
+         isCalled = false;
+        }, wait);
+       }
+   }
+}
+
+```
 **Variants:** leading/trailing, using timers instead of timestamps, returning last result, throttling promises.
 
 **Pitfalls:** Incorrect leading/trailing handling causing missed calls.
