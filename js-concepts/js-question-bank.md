@@ -8,70 +8,70 @@
 ## 1. Hoisting Surprise (Difficulty: Easy)  
 **Concepts:** Hoisting, var/let/const, Temporal Dead Zone (TDZ)
 
-- [ ] Main: `console.log(a); var a = 10;`
-- [ ] Variant 1: `console.log(a); let a = 5;`
-- [ ] Variant 2: `test(); function test() { console.log("Hello"); }`
-- [ ] Variant 3: `console.log(b); const b = 10;`
+-  Main: `console.log(a); var a = 10;`
+- [x] Variant 1: `console.log(a); let a = 5;`
+- [x] Variant 2: `test(); function test() { console.log("Hello"); }`
+- [x] Variant 3: `console.log(b); const b = 10;`
 
 ---
 
 ## 2. Closure Counter (Difficulty: Easy–Medium)  
 **Concepts:** Closures, lexical scope, persistent state
 
-- [ ] Main: Create a counter function that increments on each call.
-- [ ] Variant 1: Add a decrement method.
-- [ ] Variant 2: Add a reset method.
-- [ ] Variant 3: Multiple independent counters.
+- [x] Main: Create a counter function that increments on each call.
+- [x] Variant 1: Add a decrement method.
+- [x] Variant 2: Add a reset method.
+- [x] Variant 3: Multiple independent counters.
 
 ---
 
 ## 3. Once Function (Difficulty: Medium)  
 **Concepts:** Closures, higher-order functions, state management
 
-- [ ] Main: Implement `once(fn)` so fn runs only once.
-- [ ] Variant 1: Async-safe version of `once`.
-- [ ] Variant 2: Reset after N calls.
-- [ ] Variant 3: Retry on failure.
+- [x] Main: Implement `once(fn)` so fn runs only once.
+- [x] Variant 1: Async-safe version of `once`.
+- [x] Variant 2: Reset after N calls.
+- [x] Variant 3: Retry on failure.
 
 ---
 
 ## 4. Private Variables (Difficulty: Medium)  
 **Concepts:** Closures, encapsulation, WeakMap, private class fields
 
-- [ ] Main: Implement private variables using closures.
-- [ ] Variant 1: Use WeakMap for private data in classes.
-- [ ] Variant 2: Module pattern with private state.
-- [ ] Variant 3: Mixing public & private methods in class.
+- [x] Main: Implement private variables using closures.
+- [x] Variant 1: Use WeakMap for private data in classes.
+- [x] Variant 2: Module pattern with private state.
+- [x] Variant 3: Mixing public & private methods in class.
 
 ---
 
 ## 5. Lost Context (Difficulty: Medium)  
 **Concepts:** `this` binding, call-site, bind/call/apply
 
-- [ ] Main: Method loses `this` when assigned to a variable.
-- [ ] Variant 1: Fix context in event listener via `.bind`.
-- [ ] Variant 2: Arrow vs normal function in `setTimeout`.
-- [ ] Variant 3: Binding `this` in class constructor.
+- [x] Main: Method loses `this` when assigned to a variable.
+- [x] Variant 1: Fix context in event listener via `.bind`.
+- [x] Variant 2: Arrow vs normal function in `setTimeout`.
+- [x] Variant 3: Binding `this` in class constructor.
 
 ---
 
 ## 6. Debounce Function (Difficulty: Medium)  
 **Concepts:** Closures, timers, async control
 
-- [ ] Main: Implement debounce.
-- [ ] Variant 1: Immediate invoke option.
-- [ ] Variant 2: Cancel method.
-- [ ] Variant 3: Leading & trailing calls.
+- [x] Main: Implement debounce.
+- [x] Variant 1: Immediate invoke option.
+- [x] Variant 2: Cancel method.
+- [x] Variant 3: Leading & trailing calls.
 
 ---
 
 ## 7. Throttle Function (Difficulty: Medium)  
 **Concepts:** Closures, timers, performance optimization
 
-- [ ] Main: Implement throttle.
-- [ ] Variant 1: Leading edge only.
-- [ ] Variant 2: Trailing edge only.
-- [ ] Variant 3: Leading & trailing combo.
+- [x] Main: Implement throttle.
+- [x] Variant 1: Leading edge only.
+- [x] Variant 2: Trailing edge only.
+- [x] Variant 3: Leading & trailing combo.
 
 ---
 
