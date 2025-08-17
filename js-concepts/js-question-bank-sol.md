@@ -434,39 +434,37 @@ function throttle(func, wait) {
 **Concepts:** Recursion, handling built-in types, circular refs  
 **Difficulty:** Medium–Hard
 
-**Simple deep clone (no circular)**
+**Simple deep clone (no circular), not doing variants not so important as per interview i think**
 ```js
-function deepClone(obj) {
-  if (obj === null || typeof obj !== 'object') return obj;
-  if (obj instanceof Date) return new Date(obj);
-  if (obj instanceof RegExp) return new RegExp(obj);
-  if (Array.isArray(obj)) return obj.map(deepClone);
-  const res = {};
-  for (const k in obj) {
-    if (obj.hasOwnProperty(k)) res[k] = deepClone(obj[k]);
-  }
-  return res;
-}
-```
+const originalObject = {
+ name: 'Spider',
+ age: 25,
+ hobbies: ['swinging', 'walking'],
+ address: {
+ city: 'Brooklyn',
+ zip: 'karo',
+ },
+};
 
-**Variant - circular refs:** use WeakMap to track seen objects
-```js
-function deepCloneCircular(obj, seen = new WeakMap()) {
-  if (obj === null || typeof obj !== 'object') return obj;
-  if (seen.has(obj)) return seen.get(obj);
-  if (obj instanceof Date) return new Date(obj);
-  if (obj instanceof RegExp) return new RegExp(obj);
-  const copy = Array.isArray(obj) ? [] : {};
-  seen.set(obj, copy);
-  for (const k in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, k)) {
-      copy[k] = deepCloneCircular(obj[k], seen);
+
+ function deepClone(value) {
+    if(value === null || typeof value !== 'object') return value;
+
+    if(Array.isArray(value)){
+      return value.map((item) => deepClone(item))
     }
-  }
-  return copy;
-}
-```
 
+    const clonedObj = {};
+    for(const key in value){
+       clonedObj[key] = deepClone(value[key]);
+    }
+
+    return clonedObj;
+}
+
+const obj2 = deepClone(originalObject)
+console.log(obj2)
+```
 **Pitfalls:** Not handling Maps/Sets/functions/prototype chain.
 
 ---
