@@ -475,10 +475,17 @@ console.log(obj2)
 
 ### Recursive flatten
 ```js
-function flatten(arr) {
-  return arr.reduce((acc, val) => 
-    acc.concat(Array.isArray(val) ? flatten(val) : val), []
-  , []);
+function flatten(value) {
+     if(!Array.isArray(value)) return value;
+     let newArr = [];
+     value.map((item) => {
+       if(!Array.isArray(item)){
+          newArr.push(item);
+       }else{
+          newArr = [...newArr, ...flatten(item)];
+       }
+     })
+     return newArr;
 }
 ```
 
