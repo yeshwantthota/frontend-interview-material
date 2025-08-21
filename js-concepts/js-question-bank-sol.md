@@ -548,6 +548,81 @@ class EventEmitter {
 ```
 
 **Variants:** wildcard events, listener limits, async handlers (await results, return Promise.all of handlers).
+```js
+class EventEmitter  {
+  constructor(){
+    this.eventMap = new Map();
+    this.onceMap = new Map();
+  }
+
+  on(eventName, eventHandler) {
+     if(!this.eventMap.has(eventName)){
+       this.eventMap.set(eventName, [eventHandler]);
+     }else{
+       const eventListenerList = this.eventMap.get(eventName);
+       eventListenerList.push(eventHandler);
+     }
+     return this;
+  }
+
+  off(eventName, eventHandler) {
+     if(this.eventMap.has(eventName)){
+        const eventListenerList = this.eventMap.get(eventName);
+        const newEventListenerList = eventListenerList.filter((cb) => cb !== eventHandler);
+        this.eventMap.set(eventName, newEventListenerList);
+     }
+     return this;
+  }
+  
+  once(eventName, eventHandler) {
+      if(!this.onceMap.has(eventName)){
+        this.onceMap.set(eventName, [eventHandler]);
+      }else{
+        this.onceMap.get(eventName).push(eventHandler);
+      }
+  }
+
+  emit(eventName, ...eventData){
+    if(onceMap.has(eventName)){
+      onceMap.get(eventName).forEach((cb) => {
+        cb(...eventData);
+      })
+      onceMap.delete(eventName);
+      return true;
+    }
+    const currentEventHandlerList = this.eventMap.get(eventName) || [];
+    if(currentEventHandlerList.length === 0) return false;
+    currentEventHandlerList.forEach((cb) => {
+      cb(...eventData)
+    })
+    return true;
+  }
+
+  async emitAsync(eventName, ...eventData) {
+    const currentEventHandlerList = this.eventMap.get(eventName) || [];
+    if (currentEventHandlerList.length === 0) return false;
+
+    await Promise.all(
+      currentEventHandlerList.map(cb => Promise.resolve(cb(...eventData)))
+    );
+
+    return true;
+  }
+}
+
+
+const emitter = new EventEmitter();
+
+emitter.on("asyncTask", async (x) => {
+  await new Promise(r => setTimeout(r, 5000));
+  console.log("Done:", x);
+});
+(async () => {
+  console.log("Emitting...");
+  await emitter.emitAsync("task", 42);
+  console.log("All handlers done!");
+})();
+```
 
 **Pitfalls:** Not cloning listener array before emitting (mutations during emit), memory leak by never removing listeners.
 
