@@ -127,7 +127,7 @@
 
 ## 13. Memoization (Difficulty: Medium)  
 **Concepts:** Closures, caching, higher-order functions
-
+- https://www.greatfrontend.com/questions/javascript/memoize
 - [ ] Main: Implement `memoize(fn)`.
 - [ ] Variant 1: Support multiple arguments.
 - [ ] Variant 2: Support async functions.
